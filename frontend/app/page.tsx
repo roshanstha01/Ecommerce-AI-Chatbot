@@ -27,7 +27,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://api.roshan-shrestha.name.np/chat", {
+      const response = await fetch("https://ecommerce-ai-backend-3g7y.onrender.com/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
