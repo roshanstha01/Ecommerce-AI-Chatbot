@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,6 +8,7 @@ from app.services.product_service import search_products
 
 from app.rag.vector_store import search_chunks
 from app.services.ollama_service import generate_rag_answer
+
 
 
 app = FastAPI(title="E-commerce AI Chatbot API")
@@ -83,3 +86,8 @@ def chat(request: ChatRequest):
 def rag_test(request: ChatRequest):
     docs = search_chunks(request.message, top_k=3)
     return {"matches": docs}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
