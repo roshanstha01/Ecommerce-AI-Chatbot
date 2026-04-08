@@ -6,9 +6,16 @@ import os
 
 app = FastAPI(title="E-commerce AI Chatbot API")
 
+origins = [
+    "http://localhost:3000",
+    "https://ecommerce-ai-chatbot-rouge.vercel.app",
+    "https://roshan-shrestha.name.np",
+    "https://www.roshan-shrestha.name.np",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
