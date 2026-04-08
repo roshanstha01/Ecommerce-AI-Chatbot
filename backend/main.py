@@ -1,21 +1,14 @@
-import os
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from app.rag.vector_store import search_chunks
 from app.services.product_service import search_products
-
-from app.rag.vector_store import search_chunks
-from app.services.ollama_service import generate_rag_answer
-
-
+import os
 
 app = FastAPI(title="E-commerce AI Chatbot API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,7 +18,13 @@ class ChatRequest(BaseModel):
     message: str
     history: list | None = []
 
-from app.data.store_data import STORE_INFO
+STORE_INFO = {
+    "shipping": "Standard shipping usually takes 3 to 5 business days. Express shipping takes 1 to 2 business days.",
+    "refund": "Refunds are processed within 5 to 7 business days after approval.",
+    "return": "Eligible products can be returned within 7 days of delivery if unused and in original packaging.",
+    "payment": "We support debit cards, credit cards, eSewa, Khalti, and cash on delivery.",
+    "order": "You can track your order from the tracking page using your order ID."
+}
 
 @app.get("/")
 def root():
@@ -35,57 +34,30 @@ def root():
 def health():
     return {"status": "ok"}
 
-'''@app.post("/chat")
-def chat(request: ChatRequest):
-    query = request.message.lower()
-
-    # 🔥 Product search trigger
-    if any(word in query for word in ["show", "product", "buy", "price"]):
-        products = search_products(query)
-
-        if products:
-            reply = "Here are some products:\n\n"
-            for p in products:
-                reply += f"- {p['name']} (Rs. {p['price']})\n"
-            return {"reply": reply}
-
-    # Normal RAG + LLM
-    retrieved_docs = search_chunks(request.message, top_k=2)
-
-    answer = generate_rag_answer(
-        request.message,
-        retrieved_docs,
-        request.history
-    )
-
-    return {"reply": answer}'''
-
 @app.post("/chat")
 def chat(request: ChatRequest):
     query = request.message.lower()
 
-    # Product search
-    if any(word in query for word in ["show", "product", "buy", "price", "under"]):
+    if any(word in query for word in ["show", "product", "buy", "price", "under", "shoes", "electronics", "clothing"]):
         products = search_products(query)
-
         if products:
             reply = "Here are some products:\n\n"
             for p in products:
                 reply += f"- {p['name']} (Rs. {p['price']})\n"
             return {"reply": reply}
 
-    # RAG fallback
-    retrieved_docs = search_chunks(request.message, top_k=1)
-
-    if retrieved_docs:
-        return {"reply": retrieved_docs[0]}
+    if "shipping" in query or "delivery" in query:
+        return {"reply": STORE_INFO["shipping"]}
+    elif "refund" in query:
+        return {"reply": STORE_INFO["refund"]}
+    elif "return" in query:
+        return {"reply": STORE_INFO["return"]}
+    elif "payment" in query or "esewa" in query or "khalti" in query:
+        return {"reply": STORE_INFO["payment"]}
+    elif "order" in query or "track" in query:
+        return {"reply": STORE_INFO["order"]}
 
     return {"reply": "Sorry, I could not find relevant information."}
-
-@app.post("/rag-test")
-def rag_test(request: ChatRequest):
-    docs = search_chunks(request.message, top_k=3)
-    return {"matches": docs}
 
 if __name__ == "__main__":
     import uvicorn
