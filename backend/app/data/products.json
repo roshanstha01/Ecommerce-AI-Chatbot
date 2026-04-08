@@ -1,0 +1,10 @@
+[
+  { "name": "Nike Runner", "price": 4500, "category": "shoes" },
+  { "name": "Adidas Sport", "price": 4800, "category": "shoes" },
+  { "name": "Puma Street", "price": 5200, "category": "shoes" },
+
+  { "name": "iPhone 13", "price": 120000, "category": "electronics" },
+  { "name": "Samsung Galaxy S21", "price": 95000, "category": "electronics" },
+
+  { "name": "Leather Jacket", "price": 7000, "category": "clothing" }
+]
