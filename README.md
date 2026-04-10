@@ -62,6 +62,5 @@ This approach improves accuracy and reduces hallucination using contextual retri
 
 ![Demo 1](assets/demo1.png)
 
-![Fraud Transaction](assets/demo2.png)
+![Demo_2](assets/demo2.png)
 
-![Fraud Transaction](assets/demo3.png)
