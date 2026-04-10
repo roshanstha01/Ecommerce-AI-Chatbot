@@ -47,7 +47,7 @@ This approach improves accuracy and reduces hallucination using contextual retri
 - REST API
 
 ### AI / ML
-- LLM API (OpenAI / similar)
+- LLM API (Ollama)
 - RAG Architecture
 - Vector Embeddings
 - Similarity Search
