@@ -192,10 +192,7 @@ export default function PortfolioHomepage() {
                     Shrestha
                   </span>
                 </h1>
-                <p className="max-w-xl text-sm leading-7 text-slate-300 sm:text-base md:text-lg md:leading-8">
-                  I build polished AI, ML, and full-stack projects focused on
-                  real-world usability, deployment, and strong problem solving.
-                </p>
+                
               </div>
 
               <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -217,12 +214,12 @@ export default function PortfolioHomepage() {
 
               <div className="grid max-w-xl grid-cols-1 gap-4 pt-4 sm:grid-cols-3">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-                  <p className="text-2xl font-semibold text-white">3+</p>
+                  <p className="text-2xl font-semibold text-white">3</p>
                   <p className="text-sm text-slate-400">Featured Projects</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
                   <p className="text-2xl font-semibold text-white">AI/ML</p>
-                  <p className="text-sm text-slate-400">Focused Domain</p>
+                  <p className="text-sm text-slate-400">Focused</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
                   <p className="text-2xl font-semibold text-white">Deploy</p>
@@ -389,7 +386,7 @@ export default function PortfolioHomepage() {
                 GitHub
               </a>
               <a
-                href="mailto:your-email@example.com"
+                href="mailto:roshanstha978@gmail.com"
                 className="rounded-full bg-white px-6 py-3 font-medium text-black transition hover:scale-[1.02]"
               >
                 Email Me
