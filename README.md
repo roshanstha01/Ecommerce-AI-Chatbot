@@ -35,7 +35,7 @@ This approach improves accuracy and reduces hallucination using contextual retri
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js
